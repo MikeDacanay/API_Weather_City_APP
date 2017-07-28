@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8">
+		<title>
+		</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+		</script>
+	</head>
+	<body>
+		<form>
+			<input type = "text">
+			<button type = "submit">Search Weather </button>
+
+			<h1></h1>
+			<p></p>
+		</form>
+		<script>
+			$(document).ready(function() {
+			    $('form').submit(function() {
+			       var x = $("input").val();
+
+			        $.get("http://api.openweathermap.org/data/2.5/weather?q=" + x + ",uk&&appid=d5ab84f3bbff04a8a02a7d894914bc55", function(res) {
+			        	console.log(res.main.temp);
+
+			        	$("h1").html(x);
+			        	$("p").html("temp: " + (Math.trunc(((res.main.temp) - 273.15) * 9/5) + 32)) ;
+			        }, 'json');
+			        return false;
+			    });
+			});
+		</script>
+	</body>
+</html>
+
+<!-- (( kelvinValue - 273.15) * 9/5) + 32 -->
